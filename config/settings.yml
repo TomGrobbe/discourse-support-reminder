@@ -1,0 +1,16 @@
+plugins:
+  discourse_support_reminder_enabled:
+    default: true
+    client: true
+  discourse_support_reminder_categories_names:
+    client: false
+    type: category_list
+    default: 'Staff'
+  discourse_support_reminder_message:
+    client: false
+    type: string
+    default: 'Hi there.<br>Please note that (most) support on this site is provided by the FiveM community. You might not receive a reply on this topic if the community or FiveM staff members are unable to assist you.<br>To improve your chances of a reply, please provide as much information as possible about the issue(s) you are having, and use the support template if possible.<br>Thanks :mascot:'
+  discourse_support_reminder_excempt_staff:
+    client: true
+    type: bool
+    default: false
