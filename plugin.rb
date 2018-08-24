@@ -1,6 +1,6 @@
 # name: discourse-support-reminder
 # about: Notifies the user when creating a support topic that support is provided by the community.
-# version: 0.0.1
+# version: 0.1
 # authors: Tom Grobbe
 # url: https://github.com/TomGrobbe/discourse-support-reminder
 
@@ -62,7 +62,7 @@ after_initialize do
                                 end
                             end
                             if !already_reminded_before
-                                PostCreator.create!(Discourse.system_user.id, topic_id: topic.id, raw: reminder_message.to_s)
+                                PostCreator.create!(Discourse.system_user, topic_id: topic.id, raw: reminder_message.to_s)
                                 # topic.update_status("visible", false, Discourse.system_user)
                                 # topic.update_status("closed", true, Discourse.system_user, message: reminder_message.to_s)
                                 # if SiteSetting.discourse_topic_limit_auto_delete_topic
