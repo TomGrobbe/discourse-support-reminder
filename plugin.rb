@@ -1,6 +1,6 @@
 # name: discourse-support-reminder
 # about: Notifies the user when creating a support topic that support is provided by the community.
-# version: 0.1
+# version: 1.0
 # authors: Tom Grobbe
 # url: https://github.com/TomGrobbe/discourse-support-reminder
 
@@ -37,16 +37,12 @@ after_initialize do
     DiscourseEvent.on(:topic_created) do |topic, post, user|
         if enabled_site_setting 
             topics_posted = 0
-            # max_posts_allowed = SiteSetting.discourse_topic_limit_max_posts
-            # if !max_posts_allowed
-                # max_posts_allowed = 1
-            # end
             target_categories = SiteSetting.discourse_support_reminder_categories_names.split("|")
             
             if target_categories and target_categories != "" and target_categories != "none"
                 reminder_message = SiteSetting.discourse_support_reminder_message
                 if !reminder_message or reminder_message == ""
-                    reminder_message = "Hi there.<br>Please note that (most) support on this site is provided by the FiveM community. You might not receive a reply on this topic if the community or FiveM staff members are unable to assist you.<br>To improve your chances of a reply, please provide as much information as possible about the issue(s) you are having, and use the support template if possible.<br>Thanks :mascot:"
+                    reminder_message = "Hi there, this is a small reminder because it's your first time creating a topic here.<br><br>Please note that support on these forums are provided by the FiveM community. Because of this, there is a small chance that your topic will not receive any replies to help you out. Sometimes the exact cause of your issue(s) are unknown, and therefor the community or FiveM staff is unable to assist you. To avoid unnecessary/duplicate topics, please browse the forums before creating a topic.<br><br>To improve your chances of a reply, please provide as much information as possible about the issue(s) you are having. Also, whenever possible, use the support template given to you as soon as you create a topic.<br><br>Thanks for helping us keeping these forums tidy! :mascot:"
                 end
                 target_categories.each do |target_category|
                     ignore_staff = SiteSetting.discourse_support_reminder_excempt_staff
@@ -63,11 +59,6 @@ after_initialize do
                             end
                             if !already_reminded_before
                                 PostCreator.create!(Discourse.system_user, topic_id: topic.id, raw: reminder_message.to_s)
-                                # topic.update_status("visible", false, Discourse.system_user)
-                                # topic.update_status("closed", true, Discourse.system_user, message: reminder_message.to_s)
-                                # if SiteSetting.discourse_topic_limit_auto_delete_topic
-                                    # topic.topic_timers=[TopicTimer.create(execute_at: DateTime.now + 24.hours, status_type: 4, user_id: Discourse.system_user.id, topic_id: topic.id, based_on_last_post: false, created_at: DateTime.now, updated_at: DateTime.now, public_type: true)]
-                                # end
                             end
                         end
                     end

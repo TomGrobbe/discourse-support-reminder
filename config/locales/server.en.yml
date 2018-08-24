@@ -1,6 +1,6 @@
 en:
   site_settings:
-    discourse_support_reminder_enabled: "Enable discourse support reminder."
+    discourse_support_reminder_enabled: "Enable the discourse support reminder plugin (may not work as intended due to discourses way of enabling plugins)."
     discourse_support_reminder_categories_names: "Enabled categories, leaving this empty will disable all categories."
-    discourse_support_reminder_message: "The message displayed to the user when closing the topic."
-    discourse_support_reminder_excempt_staff: "Allow staff members to create unlimited topics regardless of the limit."
+    discourse_support_reminder_message: "This is the message that will be sent to the user whenever they create a topic in the specified category/categories above for the very first time, or if all their previous topics in those categories have been closed."
+    discourse_support_reminder_excempt_staff: "Do not remind staff members when creating a topic."
